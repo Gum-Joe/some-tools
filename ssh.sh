@@ -1,6 +1,16 @@
 #!/bin/bash
 
-# A simple script to setup SSH for lab machine
+# A simple script to setup SSH for lab machines
+# Run this on your local machine
+# Download a copy using the "Raw" button on GitHub
+# Or by entering these commands into your terminal (replace <username> by your username, e.g. ./ssh.sh kss22):
+#   curl https://raw.githubusercontent.com/Gum-Joe/some-tools/master/ssh.sh -o ./ssh.sh
+#   chmod +x ./ssh.sh
+#   ./ssh.sh <username>
+
+# Usage: ./ssh.sh <username>
+# E.g. ./ssh.sh kss22
+
 # By Kishan Sambhi (kss22) (kishansambhi@hotmail.co.uk)
 # Created with the help of GitHub Copilot
 
@@ -120,7 +130,8 @@ echo "========================================"
 echo "PHASE 2: Copy SSH keys to shell & authorise accross machines"
 echo "========================================"
 echo "Using ssh-copy-id to copy keys to shell entry points for DoC servers..."
-echo "Please enter your REGULAR IMPERIAL LOGIN PASSWORD when prompted."
+echo "If you see a message like 'Are you sure you want to continue connecting (yes/no/[fingerprint])?', enter 'yes'."
+echo "Please enter your REGULAR IMPERIAL LOGIN PASSWORD when prompted the password for $USER@$SHELL_USED (this should be the last time you enter it for an SSH session, from then on use the passcode set for the SSH key if you set one)"
 if command -v ssh-copy-id &> /dev/null
 then
   # BEGIN: ed8c6549bwf9
@@ -262,6 +273,7 @@ echo "  Your SSH private key is located at: $SSH_PRIVATE_KEY"
 echo "  Your SSH public key is located at: $SSH_PUB_KEY"
 echo "  Your SSH config file is located at: ~/.ssh/config"
 echo "========================================"
+echo
 echo -e "\033[1mNOW READ THE BELOW:\033[0m"
 echo "You can now SSH into the shell machines using the following commands:"
 echo
