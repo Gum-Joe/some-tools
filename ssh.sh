@@ -108,11 +108,9 @@ ssh-keygen -t $SSH_KEY_SCHEME \
 echo "========================================"
 echo "WHAT JUST HAPPENED:"
 # Explanation to user of the SSH keys just created, and why they are needed
-echo "  We just generated a public and private key pair. The public key is used to identify you to the server, and the private key is used to decrypt the public key."
+echo "  We just generated a public and private key pair. The public key is used to identify you to the server, and the private key is used to decrypt messages sent using the public key."
 echo "  The public key is stored on the server, and the private key is stored locally. The private key may be encrypted with a passphrase (if you chose one), which you will be prompted for when you login."
-echo "  The public key is stored in ~/.ssh/id_rsa.pub, and the private key is stored in ~/.ssh/id_rsa"
 echo "  When you login, rather than be prompting for your imperial password, SSH will use these keys automatically to login into the server."
-echo "  You can view the public key by running cat ~/.ssh/id_rsa.pub"
 echo "  NEVER SHARE YOUR PRIVATE KEY WITH ANYONE. \
     If you do, they can login to the server as you."
 echo "========================================"
