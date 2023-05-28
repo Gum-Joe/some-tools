@@ -303,7 +303,24 @@ Host anylab
 echo "Writing SSH Config file..."
 echo "$complete_config" >> $HOME/.ssh/config
 
-echo "SETUP COMPLETE!"
+echo "SSH SETUP COMPLETE!"
+
+# Contributions to automate this are welcome
+print_manual_vscode_setting() {
+  echo
+  echo -e "\033[1mIMPORTANT ADDENUM:\033[0m Getting VSCode Remote SSH to work."
+  echo "Unfortunately we're not quite done yet: VSCode Remote SSH will not work properly until you make a small change to your VSCode settings."
+  echo "I would make this change automatically, however modifying the settings in a bash script is really hard, and not guaranteed to work accross platforms, and might mess up the settings file if done improperly (contributions to make this automated are welcome)."
+  echo "Follow these steps:"
+  echo "  1. Open VSCode"
+  echo '  2. Open settings (the GUI for settings): keyboard shortcut is "Command+," or "Ctrl+,"'
+  echo -e "  3. Search for 'remote.SSH.useLocalServer'. Make sure this is \033[1mUNTICKED\033[0m"
+  echo -e "  4. Search for 'remote.SSH.remotePlatform'. Add a new entry called \033[1m'vscodelab'\033[0m with the value \033[1m'linux'\033[0m"
+  echo "  5. Your settings save automatically, and now lab machine SSH should work!"
+  echo
+  echo "========================================"
+}
+
 echo "========================================"
 echo "Files generated:"
 echo "  Your SSH private key is located at: $SSH_PRIVATE_KEY"
@@ -323,6 +340,8 @@ echo "(if you don't have this extension, look it up - it lets you use VSCode on 
 echo "Select vscodelab as the target machine when setting up VSCode remote dev"
 echo "  ssh vscodelab"
 echo
+echo -e "\033[1mVSCODE NOTE 2:\033[0m Remote Dev SSH might not immediately work - please see the addenum printed after this section for how to get VSCode Remote Dev SSH to work properly with lab machines"
+echo
 echo "TO ACCESS LAB SHELLS (these are the shells, not the lab machines themselves! Never work out of these!):"
 echo "  ssh shell1.doc.ic.ac.uk"
 echo "  ssh shell2.doc.ic.ac.uk"
@@ -334,5 +353,7 @@ echo "NOTE: To get vscodelab to work, we had to pick a specific lab machine to S
 echo "This is fixed (unlike anylab which will pick a random machine each time)"
 echo "You can change it in ~/.ssh/config"
 echo " Your randomly selected machine was: $SELECTED_LAB_MACHINE"
+echo
 echo "========================================"
+print_manual_vscode_setting
 echo "Done."
