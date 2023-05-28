@@ -73,10 +73,6 @@ if [ -z "$1" ]
       exit 0
 fi
 
-
-
-
-
 if [ ! -d $HOME/.ssh ]; then
 	echo "ERROR: No SSH dir present"
 	echo "This script is not prepared to deal with such an environment"
