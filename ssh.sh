@@ -302,7 +302,7 @@ echo "Writing SSH Config file..."
 echo "$complete_config" >> $HOME/.ssh/config
 echo "Validating...."
 echo "Testing anylab..."
-if ssh anylab "echo 'SSH Auth Successful!' > /dev/null"; then
+if echo "SSH > /dev/null; exit" | ssh anylab > /dev/null; then
   echo "SSH succeeded!"
 else
   echo "SSH failed. This means something went wrong with the script!"
