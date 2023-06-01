@@ -149,13 +149,14 @@ fix_issue_01() {
 	echo "Note that we attempt patching several times just in case this script has been ran multiple times."
 	echo "Once patch complains about having nothing to patch, we are done."
 	echo "IF THE PATCH DOESN'T WORK OR FAILS FOR ANY REASON: You'll need to manually replace all instance of $HOME with ~ (a tilde character) in your SSH config."
+  echo "A backup of the unmodified SSH config file before attempting this fix will be at $HOME/.ssh/config.orig"
 	echo
   # Run patch several times (JIC script was ran multiple times)
   # Eventually patch fails
   patch_output_1=0
   while [ $patch_output_1 == 0 ]; do
 		echo "Patching..."
-    patch -sNu ./config_old_test <(echo "$ISSUE_01_PATH")
+    patch -sNub $HOME/.ssh/config <(echo "$ISSUE_01_PATH")
     patch_output_1=$?
   done
 	echo
