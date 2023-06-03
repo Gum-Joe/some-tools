@@ -147,7 +147,7 @@ ISSUE_01_PATH="
 " 
 
 fix_issue_01() {
-  if [ -z "$2" ]
+  if [ -z "$1" ]
     then
       echo "Please remember to enter a username as the 2nd argument."
       echo "E.g. ./ssh.sh --fix-windows-ssh kss22"
@@ -155,7 +155,7 @@ fix_issue_01() {
   fi
 
   # Safe territory - a username is defined
-  USER=$2
+  USER=$1
 
   if [ "$USER" = "<username>" ]; then
     echo "ERROR: Please replace <username> with your actual username (imperial shortcode)."
@@ -207,7 +207,7 @@ printhelp() {
 # HACK: Jump to patching my mistake in #1
 if [ "$1" = "--fix-windows-ssh" ]; then
   echo "Skipping normal execution to fix windows ssh (issue number #1 on GitHub)..."
-  fix_issue_01
+  fix_issue_01 $USER_FIX_01
   exit 0
 fi
 
