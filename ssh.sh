@@ -165,7 +165,8 @@ fix_issue_01() {
   echo "Attempting fix via patch...."
 	echo "Note that we attempt patching several times just in case this script has been ran multiple times."
 	echo "Once patch complains about having nothing to patch, we are done."
-	echo "IF THE PATCH DOESN'T WORK OR FAILS FOR ANY REASON: You'll need to manually replace all instance of $HOME with ~ (a tilde character) in your SSH config."
+  echo
+	echo -e "\033[1mIF THE PATCH DOESN'T WORK OR FAILS FOR ANY REASON, or you are still asked for your password every time when using VSCode remote SSH:\033[0m You'll need to manually replace all instance of $HOME with ~ (a tilde character) in your SSH config."
   echo "A backup of the unmodified SSH config file before attempting this fix will be at $HOME/.ssh/config.orig"
 	echo
   # Run patch several times (JIC script was ran multiple times)
