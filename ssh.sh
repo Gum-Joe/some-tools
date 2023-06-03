@@ -95,6 +95,8 @@ validate_ssh_config() {
   fi
 }
 
+USER_FIX_01=$2
+
 # Fix for issue #1, where POSIX paths were used in SSH config files on Windows
 # And Windows SSH doesn't like this :(
 # We use patch becuase I'm scared awk will modify the wrong thing
@@ -104,31 +106,31 @@ ISSUE_01_PATH="
 +++ config_new	2023-06-01 22:38:37.729020700 +0100
 @@ -5,27 +5,27 @@
  Host shell1.doc.ic.ac.uk
-   User kss22
+   User $USER_FIX_01
    HostName shell1.doc.ic.ac.uk
 -  IdentityFile $HOME/.ssh/doclab_ecdsa
 +  IdentityFile ~/.ssh/doclab_ecdsa
  
  Host shell2.doc.ic.ac.uk
-   User kss22
+   User $USER_FIX_01
    HostName shell2.doc.ic.ac.uk
 -  IdentityFile $HOME/.ssh/doclab_ecdsa
 +  IdentityFile ~/.ssh/doclab_ecdsa
  
  Host shell3.doc.ic.ac.uk
- 	User kss22
+ 	User $USER_FIX_01
  	HostName shell3.doc.ic.ac.uk
 -	IdentityFile $HOME/.ssh/doclab_ecdsa
 +	IdentityFile ~/.ssh/doclab_ecdsa
  
  Host shell4.doc.ic.ac.uk
-   User kss22
+   User $USER_FIX_01
    HostName shell4.doc.ic.ac.uk
 -  IdentityFile $HOME/.ssh/doclab_ecdsa
 +  IdentityFile ~/.ssh/doclab_ecdsa
  
  Host shell5.doc.ic.ac.uk
-   User kss22
+   User $USER_FIX_01
    HostName shell5.doc.ic.ac.uk
 -  IdentityFile $HOME/.ssh/doclab_ecdsa
 +  IdentityFile ~/.ssh/doclab_ecdsa
@@ -145,6 +147,21 @@ ISSUE_01_PATH="
 " 
 
 fix_issue_01() {
+  if [ -z "$2" ]
+    then
+      echo "Please remember to enter a username as the 2nd argument."
+      echo "E.g. ./ssh.sh --fix-windows-ssh kss22"
+      exit 1
+  fi
+
+  # Safe territory - a username is defined
+  USER=$2
+
+  if [ "$USER" = "<username>" ]; then
+    echo "ERROR: Please replace <username> with your actual username (imperial shortcode)."
+    echo "Example usage: ./ssh.sh --fix-windows-ssh kss22"
+    exit 1
+  fi
   echo "Attempting fix via patch...."
 	echo "Note that we attempt patching several times just in case this script has been ran multiple times."
 	echo "Once patch complains about having nothing to patch, we are done."
@@ -181,7 +198,7 @@ printhelp() {
   echo "ADDITIONAL OPTIONS:"
   echo "  ./ssh.sh --help - Prints this help message"
   echo "  ./ssh.sh --version - Output version & about info"
-  echo "  ./ssh.sh --fix-windows-ssh - Fixes an issue where previous versions of this script prior to 2023-06-01 would generate SSH config files that Windows SSH doesn't like (see issue #1 on GitHub)."
+  echo "  ./ssh.sh --fix-windows-ssh <username> - Fixes an issue where previous versions of this script prior to 2023-06-01 would generate SSH config files that Windows SSH doesn't like (see issue #1 on GitHub)."
 }
 
 # HACK: Jump to patching my mistake in #1
