@@ -48,7 +48,7 @@ TODAY=$(date)
 
 # Constants
 # These define where we're going to write various things
-SSH_KEY_NAME="doclab"
+SSH_KEY_NAME="doclab_debug3"
 SSH_KEY_SCHEME="ecdsa"
 SSH_BITS="521"
 SSH_KEY_BASEPATH="$HOME/.ssh/${SSH_KEY_NAME}_${SSH_KEY_SCHEME}"
@@ -294,9 +294,12 @@ then
     fi
   # END: ed8c6549bwf9
 else
-  echo "ssh-copy-if NOT FOUND. Please install ssh-copy-id and try again."
-  echo "Contact the script author so he can add code that works if ssh-copy-id not installed"
-  exit 1
+  echo
+  echo "ssh-copy-id NOT FOUND."
+  echo "Falling back to manual alternative..."
+  echo
+  # From https://stackoverflow.com/questions/22700818/what-exactly-does-ssh-copy-id-do
+  cat "$SSH_PUB_KEY" | ssh $USER@$SHELL_USED 'cat >> ~/.ssh/authorized_keys'
 fi
 
 # Test auth
@@ -375,7 +378,7 @@ echo "========================================"
 # Func to pick a lab machine for VSCode to lock onto
 choose_lab_machine() {
   echo "Picking a random lab machine to use for VSCode etc...."
-  LAB_MACHINE=$(ssh -i "$SSH_PRIVATE_KEY" $USER@$SHELL_USED "/vol/linux/bin/freelabmachine")
+  LAB_MACHINE=$(ssh -i "$SSH_PRIVATE_KEY" $USER@$SHELL_USED \"/vol/linux/bin/freelabmachine\")
   if [ $? -eq 0 ]; then
     echo "Picked $LAB_MACHINE"
   else
@@ -451,7 +454,7 @@ Host anylab
 "
 
 echo "Writing SSH Config file..."
-echo "$complete_config" >> $HOME/.ssh/config
+echo "$complete_config" >> "$HOME/.ssh/config"
 
 validate_ssh_config
 echo "SSH SETUP COMPLETE!"
