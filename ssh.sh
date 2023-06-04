@@ -48,7 +48,7 @@ TODAY=$(date)
 
 # Constants
 # These define where we're going to write various things
-SSH_KEY_NAME="doclab_debug3"
+SSH_KEY_NAME="doclab"
 SSH_KEY_SCHEME="ecdsa"
 SSH_BITS="521"
 SSH_KEY_BASEPATH="$HOME/.ssh/${SSH_KEY_NAME}_${SSH_KEY_SCHEME}"
