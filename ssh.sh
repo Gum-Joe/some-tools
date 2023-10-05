@@ -217,7 +217,7 @@ printhelp() {
   echo "  ./ssh.sh --help - Prints this help message"
   echo "  ./ssh.sh --version - Output version & about info"
   echo "  ./ssh.sh --fix-windows-ssh <username> - Fixes an issue where previous versions of this script prior to 2023-06-01 would generate SSH config files that Windows SSH doesn't like (see issue #1 on GitHub)."
-  echo "  ./ssh.sh <username> $ENABLE_HSK_FLAG - Enable experimental support for using hardware security keys to secure SSH keys over a passkey (e.g. YubiKey, TouchID, Windows Hello etc.). EXPERIMENTAL, PROCEED AT YOUR OWN RISK."
+  echo "  ./ssh.sh <username> $ENABLE_HSK_FLAG - Enable experimental support for using hardware security keys to secure SSH keys over a passkey (e.g. YubiKey, Windows Hello etc. NOT TouchID). EXPERIMENTAL, PROCEED AT YOUR OWN RISK."
 }
 
 # HACK: Jump to patching my mistake in #1
