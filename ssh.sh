@@ -317,6 +317,16 @@ if [ ! -f "$SSH_PRIVATE_KEY" ]; then
   exit 1
 fi
 
+if [ ! -f "$SSH_PUB_JUMP_KEY" ]; then
+  echo "Error: $SSH_PUB_JUMP_KEY does not exist."
+  exit 1
+fi
+
+if [ ! -f "$SSH_PRIVATE_JUMP_KEY" ]; then
+  echo "Error: $SSH_PRIVATE_JUMP_KEY does not exist."
+  exit 1
+fi
+
 
 # Copy keys
 echo "========================================"
