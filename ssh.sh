@@ -37,8 +37,8 @@
 # THE SOFTWARE.
 
 # Version info
-VERSION="1.0.2"
-LAST_UPDATED="2023-06-01"
+VERSION="1.1.0"
+LAST_UPDATED="2023-10-18"
 AUTHOR="Kishan Sambhi"
 AUTHOR_CONTACT="kishansambhi@hotmail.co.uk"
 AUTHOR_CONTACT_IMPERIAL="kss22@ic.ac.uk"
