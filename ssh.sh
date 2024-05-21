@@ -92,7 +92,7 @@ SHELL_USED="shell$SHELL_NUMBER.doc.ic.ac.uk"
 validate_ssh_config() {
   echo "Validating...."
   echo "Testing anylab..."
-  if echo "SSH > /dev/null; exit" | ssh -T anylab > /dev/null; then
+  if echo "echo SSH > /dev/null; exit" | ssh -T anylab > /dev/null; then
     echo "SSH succeeded!"
   else
     echo "SSH failed. This means something went wrong with the script!"
