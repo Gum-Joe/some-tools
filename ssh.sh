@@ -521,7 +521,8 @@ print_manual_vscode_setting() {
   echo "Unfortunately we're not quite done yet: VSCode Remote SSH will not work properly until you make a small change to your VSCode settings."
   echo "I would make this change automatically, however modifying the settings in a bash script is really hard, and not guaranteed to work accross platforms, and might mess up the settings file if done improperly (contributions to make this automated are welcome)."
   echo "Follow these steps:"
-  echo "  1. Open VSCode"
+  echo "  0. Open VSCode"
+  echo "  1. Install the 'Remote - SSH' extension in VSCode if you haven't already"
   echo '  2. Open settings (the GUI for settings): keyboard shortcut is "Command+," or "Ctrl+,"'
   echo -e "  3. Search for 'remote.SSH.useLocalServer'. Make sure this is \033[1mUNTICKED\033[0m"
   echo -e "  4. Search for 'remote.SSH.remotePlatform'. Add a new entry called \033[1m'vscodelab'\033[0m with the value \033[1m'linux'\033[0m"
