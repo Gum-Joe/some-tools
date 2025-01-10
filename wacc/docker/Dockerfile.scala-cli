@@ -1,0 +1,43 @@
+# Dockerfile that just include coursier & scala-cli
+# Tag as gumjoe/scala-cli
+
+FROM eclipse-temurin:17-jdk
+
+# Make sure curl and bash are installed
+RUN apt-get update
+RUN apt-get upgrade -y --no-install-recommends
+RUN apt-get install -y --no-install-recommends curl bash git
+
+# Python is always useful
+RUN apt-get install -y --no-install-recommends python3 python3-dev python3-venv python3-pip
+RUN pip install --upgrade pip
+
+# Add clang & LLVM for native builds, including the optional GC
+# Should use libstdc++-12-dev
+RUN apt-get install -y --no-install-recommends clang libstdc++-12-dev libgc-dev
+
+# Install coursier (Jamie's advice)
+RUN mkdir -p /tmp
+RUN curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d > /tmp/cs
+RUN chmod +x /tmp/cs
+RUN /tmp/cs setup --yes
+
+# Install scala-cli & libraries everyone will need
+# Commands from Jamie
+# BAD but no other way to do it without a source before everything
+ENV PATH /root/.local/share/coursier/bin:$PATH
+RUN cs install scala-cli
+
+# Check scala-cli is installed
+RUN scala-cli --version
+
+# Check python
+RUN python3 --version
+RUN pip --version
+RUN pip install rich && pip uninstall -y rich # check python works
+
+# Set the new script as the entrypoint
+ENTRYPOINT ["/bin/bash", "-c", "source ~/.profile && exec \"$@\"", "--"]
+
+# And now we define the default entrypoint:
+CMD scala-cli --version

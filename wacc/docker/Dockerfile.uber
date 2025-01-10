@@ -1,0 +1,26 @@
+# Builds on work by:
+# Jack McComish <jm1922>
+# Jamie Willis
+
+
+# This is the "UBER" Docker image that contains all 3 backends
+# For use by groups who use all backends!
+
+# Use gumjoe/wacc-ci-scala:slim as the base image if you want precached deps
+ARG BASE_IMAGE=gumjoe/scala-cli:latest
+
+FROM ${BASE_IMAGE}
+
+# Add BACKENDs
+
+RUN apt-get install -y gcc gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu
+# We assume you tag this as required
+# Check it works
+RUN gcc --version
+RUN arm-linux-gnueabi-gcc --version
+RUN aarch64-linux-gnu-gcc --version
+
+# Install QEMU & check it works
+RUN apt-get install -y qemu-user
+RUN qemu-arm --version
+RUN qemu-aarch64 --version

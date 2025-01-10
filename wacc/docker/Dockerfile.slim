@@ -1,0 +1,27 @@
+# Fat version of Jack's image with more tools inside using Jamie's advice
+# Build on work by:
+# Jack McComish <jm1922>
+# Jamie Willis
+
+FROM gumjoe/scala-cli:latest
+
+
+# Install depedencies common to all groups
+RUN cs fetch org.scalatest:scalatest_2.13:3.2.18
+RUN cs fetch org.scalatest:scalatest_3:3.2.18
+RUN cs fetch com.github.j-mie6:parsley_3:5.0.0-M5 com.github.j-mie6:parsley_2.13:5.0.0-M5
+
+RUN cs fetch org.scala-lang:scala-library:2.13.12
+RUN cs fetch org.scala-lang:scala3-library_3:3.3.1
+
+# Install scala-fix
+RUN cs install scalafix
+
+# Check scala-cli is installed
+RUN scala-cli --version
+
+# Set the new script as the entrypoint
+ENTRYPOINT ["/bin/bash", "-c", "source ~/.profile && exec \"$@\"", "--"]
+
+# And now we define the default entrypoint:
+CMD scala-cli --version

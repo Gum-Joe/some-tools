@@ -15,6 +15,6 @@ Some useful scripts I wrote to do things for me
 	ssh anylab # to land you in any lab machine
 	ssh vscodelab # use vscodelab target for vscode remote dev (anylab will not work)
 	```
-s
+- `wacc/`: Tools I shared with my whole cohort to help with WACC, such as the Scala CI Docker Image everyone uses.
 ## Contributing
 Contributions are always welcome! Just fork, adjust & open a PR!
